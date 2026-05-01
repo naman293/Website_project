@@ -492,7 +492,7 @@ function HeroSection() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse at center bottom, rgba(230,57,70,0.12) 0%, transparent 60%), linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%)",
+          background: "radial-gradient(ellipse at center bottom, rgba(230,57,70,0.12) 0%, transparent 60%), linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%)",
         }}
       />
 
@@ -514,102 +514,39 @@ function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        {isMobile && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            style={{ 
-              marginTop: "0",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center"
-            }}
-          >
-            <img 
-              src="/chef_mascot_transparent.png" 
-              alt="Mascot" 
-              style={{ 
-                width: "min(80vw, 280px)", 
-                height: "auto",
-                filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.5))"
-              }} 
-            />
-          </motion.div>
-        )}
-
+        {/* ========== DESKTOP ONLY LAYOUT ========== */}
         {!isMobile && (
-          <div style={{ 
-            display: "flex", 
-            flexDirection: "column", 
-            alignItems: "center",
-            marginTop: "0",
-            marginBottom: "0"
-          }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "0", marginBottom: "0" }}>
             <motion.p
               initial={{ opacity: 0, letterSpacing: "0.3em" }}
               animate={{ opacity: 1, letterSpacing: "0.5em" }}
               transition={{ duration: 1, delay: 0.2 }}
-              style={{
-                color: "#F77F00",
-                fontSize: "0.8rem",
-                fontWeight: 700,
-                letterSpacing: "0.5em",
-                textTransform: "uppercase",
-                marginBottom: "0.75rem",
-              }}
+              style={{ color: "#F77F00", fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.5em", textTransform: "uppercase", marginBottom: "0.75rem" }}
             >
               Jaipur's Finest — Since 2018
             </motion.p>
-
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              style={{ 
-                marginBottom: "2rem", 
-                width: "100%", 
-                display: "flex", 
-                justifyContent: "center" 
-              }}
+              style={{ marginBottom: "2rem", width: "100%", display: "flex", justifyContent: "center" }}
               data-testid="hero-title"
             >
-              <img 
-                src="/ching_chong_wordmark.png" 
-                alt="CHING CHONG" 
-                style={{ 
-                  width: "min(90vw, 750px)", 
-                  height: "auto", 
-                  display: "block",
-                  opacity: 0.85,
-                  mixBlendMode: "screen",
-                  filter: "brightness(1.05) contrast(1.1) drop-shadow(0 0 20px rgba(0,0,0,0.8))"
-                }} 
-              />
+              <img src="/ching_chong_wordmark.png" alt="CHING CHONG" style={{ width: "min(90vw, 750px)", height: "auto", display: "block", opacity: 0.85, mixBlendMode: "screen", filter: "brightness(1.05) contrast(1.1) drop-shadow(0 0 20px rgba(0,0,0,0.8))" }} />
             </motion.div>
           </div>
         )}
-
         {!isMobile && (
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            style={{
-              color: "#e0e0e0",
-              fontSize: "clamp(1rem, 3vw, 1.4rem)",
-              fontWeight: 300,
-              letterSpacing: "0.08em",
-              marginBottom: "2.5rem",
-              lineHeight: 1.5,
-            }}
+            style={{ color: "#e0e0e0", fontSize: "clamp(1rem, 3vw, 1.4rem)", fontWeight: 300, letterSpacing: "0.08em", marginBottom: "2.5rem", lineHeight: 1.5 }}
           >
-            Jaipur's Boldest Indo-Chinese Experience
-            <br />
+            Jaipur's Boldest Indo-Chinese Experience<br />
             <span style={{ color: "#FCCA46", fontWeight: 500 }}>Near Rajapark — Open Daily 11am to 11pm</span>
           </motion.p>
         )}
-
         {!isMobile && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -617,141 +554,128 @@ function HeroSection() {
             transition={{ duration: 0.7, delay: 0.7 }}
             style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}
           >
-            <a
-              href={PHONE_HREF}
-              className="btn-neon-red pulse-glow"
-              data-testid="hero-call-btn"
-              style={{
-                color: "#fff",
-                textDecoration: "none",
-                padding: "clamp(12px, 2.5vw, 16px) clamp(24px, 5vw, 36px)",
-                borderRadius: "6px",
-                fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-              }}
-            >
-              <Phone size={18} />
-              CALL NOW
+            <a href={PHONE_HREF} className="btn-neon-red pulse-glow" data-testid="hero-call-btn" style={{ color: "#fff", textDecoration: "none", padding: "clamp(12px,2.5vw,16px) clamp(24px,5vw,36px)", borderRadius: "6px", fontSize: "clamp(0.9rem,2.5vw,1.1rem)", fontWeight: 700, letterSpacing: "0.1em", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+              <Phone size={18} /> CALL NOW
             </a>
-            <a
-              href="#menu"
-              className="btn-neon-outline"
-              data-testid="hero-menu-btn"
-              style={{
-                textDecoration: "none",
-                padding: "clamp(12px, 2.5vw, 16px) clamp(24px, 5vw, 36px)",
-                borderRadius: "6px",
-                fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-              }}
-            >
+            <a href="#menu" className="btn-neon-outline" data-testid="hero-menu-btn" style={{ textDecoration: "none", padding: "clamp(12px,2.5vw,16px) clamp(24px,5vw,36px)", borderRadius: "6px", fontSize: "clamp(0.9rem,2.5vw,1.1rem)", fontWeight: 700, letterSpacing: "0.1em", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
               VIEW MENU
             </a>
           </motion.div>
         )}
-
         {!isMobile && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            style={{ 
-              marginTop: "4rem", 
-              position: "relative",
-              bottom: "auto",
-              left: "auto",
-              right: "auto",
-              display: "flex", 
-              flexDirection: "row",
-              gap: "2rem", 
-              justifyContent: "center", 
-              alignItems: "center",
-              flexWrap: "wrap" 
-            }}
+            style={{ marginTop: "4rem", display: "flex", flexDirection: "row", gap: "2rem", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}
           >
             {[
               { icon: <Star size={16} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
               { icon: <MapPin size={16} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
               { icon: <Clock size={16} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
             ].map((item, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#aaa", fontSize: "0.85rem", textAlign: "center" }}>
-                {item.icon}
-                {item.text}
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#aaa", fontSize: "0.85rem" }}>
+                {item.icon}{item.text}
               </div>
             ))}
           </motion.div>
         )}
-        
-        {isMobile && (
-          <div style={{ 
-            position: "absolute", 
-            bottom: "5vh",
-            width: "100%",
-            left: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "1.5rem",
-            padding: "0 1rem"
-          }}>
-            {/* Branding Group (Main Heading) */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-            >
-              <img 
-                src="/ching_chong_wordmark.png" 
-                alt="CHING CHONG" 
-                style={{ width: "min(80vw, 400px)", opacity: 1, marginBottom: "0.2rem" }} 
-              />
-              <p style={{ 
-                color: "#F77F00", 
-                fontSize: "0.65rem", 
-                fontWeight: 700, 
-                letterSpacing: "0.4em", 
-                textTransform: "uppercase",
-              }}>
-                Jaipur's Finest — Since 2018
-              </p>
-            </motion.div>
 
-            {/* The 3 trust lines */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              style={{ 
-                display: "flex", 
-                flexDirection: "column",
-                gap: "0.5rem", 
-                justifyContent: "center", 
-                alignItems: "center"
-              }}
-            >
-              {[
-                { icon: <Star size={14} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
-                { icon: <MapPin size={14} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
-                { icon: <Clock size={14} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
-              ].map((item, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#ccc", fontSize: "0.75rem", fontWeight: 400 }}>
-                  {item.icon}
-                  {item.text}
-                </div>
-              ))}
-            </motion.div>
-          </div>
+        {/* ========== MOBILE ONLY LAYOUT ========== */}
+        {isMobile && (
+          <>
+            {/* CENTER BLOCK — Mascot + Branding grouped and vertically centered */}
+            <div style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "1.8rem",
+              width: "100%",
+              padding: "0 1.5rem",
+            }}>
+              {/* Mascot */}
+              <motion.div
+                initial={{ opacity: 0, y: -15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.2 }}
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <img
+                  src="/chef_mascot_transparent.png"
+                  alt="Chef Nepal Mascot"
+                  style={{
+                    width: "min(55vw, 220px)",
+                    height: "auto",
+                    filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.6))"
+                  }}
+                />
+              </motion.div>
+
+              {/* Branding — Jaipur's Finest + Logo */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.9 }}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.3rem" }}
+              >
+                <p style={{
+                  color: "#F77F00",
+                  fontSize: "0.6rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.45em",
+                  textTransform: "uppercase",
+                  margin: 0,
+                }}>
+                  Jaipur's Finest — Since 2018
+                </p>
+                <img
+                  src="/ching_chong_wordmark.png"
+                  alt="CHING CHONG"
+                  style={{
+                    width: "min(82vw, 380px)",
+                    height: "auto",
+                    opacity: 1,
+                    filter: "brightness(1.1) drop-shadow(0 0 18px rgba(0,0,0,0.9))"
+                  }}
+                />
+              </motion.div>
+            </div>
+
+            {/* BOTTOM BLOCK — Trust badges */}
+            <div style={{
+              position: "absolute",
+              bottom: "5vh",
+              left: 0,
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "0.45rem",
+              padding: "0 1rem",
+            }}>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.0, duration: 0.8 }}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.45rem" }}
+              >
+                {[
+                  { icon: <Star size={13} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
+                  { icon: <MapPin size={13} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
+                  { icon: <Clock size={13} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
+                ].map((item, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#ddd", fontSize: "0.72rem", fontWeight: 400 }}>
+                    {item.icon}
+                    {item.text}
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </>
         )}
       </motion.div>
 
