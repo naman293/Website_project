@@ -477,7 +477,7 @@ function HeroSection() {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `url(${isMobile ? '/mobile-hero-bg.png' : '/hero-bg.png'})`,
+          backgroundImage: `url(${isMobile ? '/hero-bg-mobile.png' : '/hero-bg-desktop.png'})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           zIndex: 0,
@@ -1538,9 +1538,9 @@ function DirectionsSection() {
                 rel="noopener noreferrer"
                 style={{
                   position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
+                  top: "12px",
+                  right: "12px",
+                  transform: "none",
                   width: "max-content",
                   background: "rgba(10,10,10,0.95)",
                   border: "2px solid #E63946",
