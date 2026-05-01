@@ -492,7 +492,7 @@ function HeroSection() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse at center bottom, rgba(230,57,70,0.12) 0%, transparent 60%), linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%)",
+          background: "radial-gradient(ellipse at center bottom, rgba(230,57,70,0.12) 0%, transparent 60%), linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 100%)",
         }}
       />
 

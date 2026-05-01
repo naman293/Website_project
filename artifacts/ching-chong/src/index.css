@@ -348,10 +348,27 @@
 }
 
 .section-divider {
+  display: block;
+  position: relative;
   width: 80px;
   height: 3px;
   background: linear-gradient(90deg, #E63946, #F77F00);
   box-shadow: 0 0 10px rgba(230, 57, 70, 0.6);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #F77F00;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(247, 127, 0, 0.9);
 }
 
 .hero-responsive-bg {
@@ -377,6 +394,11 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  /* Ensure divider is always a block element so margin: auto works */
+  section .section-divider {
+    display: block;
   }
 
   /* Cards in all sections fill width and center their content */
