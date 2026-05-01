@@ -2,25 +2,25 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Clock, Instagram, Facebook, ChevronDown, Star, Menu, X, MessageCircle } from "lucide-react";
 import { menuItems } from "@/data/menu";
-import type { MenuCategory } from "@/data/menu";
+import type { MenuCategory, IndicatorType } from "@/data/menu";
 
 const PHONE_NUMBER = "+91-9876543210";
 const PHONE_HREF = "tel:+919876543210";
 const WHATSAPP_HREF = "https://wa.me/919876543210";
 
-function VegIndicator({ category }: { category: "veg" | "non-veg" | "combo" }) {
-  if (category === "combo") {
+function VegIndicator({ indicator }: { indicator: IndicatorType }) {
+  if (indicator === "mixed") {
     return (
       <span
-        style={{ display: "inline-flex", alignItems: "center", gap: 2 }}
-        aria-label="combo"
+        style={{ display: "inline-flex", alignItems: "center", gap: 3 }}
+        aria-label="contains both veg and non-veg"
       >
-        <span className="veg-indicator" aria-label="contains veg" />
-        <span className="nonveg-indicator" aria-label="contains non-veg" />
+        <span className="veg-indicator" aria-label="veg" />
+        <span className="nonveg-indicator" aria-label="non-veg" />
       </span>
     );
   }
-  if (category === "veg") {
+  if (indicator === "veg") {
     return <span className="veg-indicator" aria-label="vegetarian" />;
   }
   return <span className="nonveg-indicator" aria-label="non-vegetarian" />;
@@ -618,14 +618,14 @@ function MenuSection() {
               >
                 <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "0.75rem", marginBottom: "0.5rem" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "8px", flex: 1 }}>
-                    <VegIndicator category={item.category} />
+                    <VegIndicator indicator={item.indicator} />
                     <h3 style={{ color: "#f0f0f0", fontWeight: 600, fontSize: "0.95rem", lineHeight: 1.3, margin: 0 }}>
                       {item.name}
                     </h3>
                   </div>
                   <span
                     className="font-display neon-orange"
-                    style={{ fontSize: "1.1rem", whiteSpace: "nowrap", flexShrink: 0 }}
+                    style={{ fontSize: "1.1rem", whiteSpace: "nowrap", flexShrink: 0, letterSpacing: "0.06em" }}
                   >
                     {item.price}
                   </span>
