@@ -609,7 +609,7 @@ function HeroSection() {
                   src="/chef_mascot_transparent.png"
                   alt="Chef Nepal Mascot"
                   style={{
-                    width: "min(65vw, 260px)",
+                    width: "min(85vw, 320px)",
                     height: "auto",
                     display: "block",
                     margin: "0 auto",

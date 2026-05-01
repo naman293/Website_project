@@ -369,11 +369,20 @@
 
 /* ======= MOBILE / PHONE ALIGNMENT FIXES ======= */
 @media (max-width: 768px) {
+  /* Blend sections smoothly without strip effects */
+  section {
+    background: #080808 !important;
+  }
+  
+  /* Hide distinct section dividers on mobile for a seamless flow */
+  section .section-divider {
+    display: none !important;
+  }
+
   /* All section headings, labels and dividers centered */
   section h2,
   section h3,
-  section p,
-  section .section-divider {
+  section p {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
