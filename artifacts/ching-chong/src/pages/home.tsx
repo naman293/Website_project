@@ -1593,6 +1593,7 @@ function FAQSection() {
 }
 
 function ContactSection() {
+  const isMobile = useIsMobile();
   return (
     <section
       id="contact"
