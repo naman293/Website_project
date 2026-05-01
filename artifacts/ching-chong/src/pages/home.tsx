@@ -498,10 +498,12 @@ function HeroSection() {
           textAlign: "center", 
           padding: isMobile ? "0 1.5rem" : "2rem 1.5rem", 
           maxWidth: "900px", 
+          width: "100%",
           height: isMobile ? "100vh" : "auto",
           display: isMobile ? "flex" : "block",
           flexDirection: "column",
-          justifyContent: isMobile ? "center" : "center"
+          justifyContent: "center",
+          alignItems: isMobile ? "center" : "unset"
         }}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
