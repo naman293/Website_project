@@ -496,62 +496,91 @@ function HeroSection() {
           position: "relative", 
           zIndex: 2, 
           textAlign: "center", 
-          padding: isMobile ? "0 1.5rem" : "2rem 1.5rem", 
+          padding: isMobile ? "2vh 1.5rem" : "2rem 1.5rem", 
           maxWidth: "900px", 
           width: "100%",
           height: isMobile ? "100vh" : "auto",
           display: isMobile ? "flex" : "block",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: isMobile ? "space-between" : "center",
           alignItems: isMobile ? "center" : "unset"
         }}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <motion.p
-            initial={{ opacity: 0, letterSpacing: "0.3em" }}
-            animate={{ opacity: 1, letterSpacing: "0.5em" }}
-            transition={{ duration: 1, delay: 0.2 }}
-            style={{
-              color: "#F77F00",
-              fontSize: isMobile ? "0.7rem" : "0.8rem",
-              fontWeight: 700,
-              letterSpacing: "0.5em",
-              textTransform: "uppercase",
-              marginBottom: "0.75rem",
-            }}
-          >
-            Jaipur's Finest — Since 2018
-          </motion.p>
-
+        {isMobile && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            style={{ 
-              marginBottom: isMobile ? "1rem" : "2rem", 
-              width: "100%", 
-              display: "flex", 
-              justifyContent: "center" 
-            }}
-            data-testid="hero-title"
+            transition={{ duration: 1, delay: 0.2 }}
+            style={{ marginTop: "2vh" }}
           >
             <img 
-              src="/ching_chong_wordmark.png" 
-              alt="CHING CHONG" 
+              src="/mascot.jpg" 
+              alt="Mascot" 
               style={{ 
-                width: isMobile ? "min(85vw, 600px)" : "min(90vw, 750px)", 
-                height: "auto", 
-                display: "block",
-                opacity: 0.85,
-                mixBlendMode: "screen",
-                filter: "brightness(1.05) contrast(1.1) drop-shadow(0 0 20px rgba(0,0,0,0.8))"
+                width: "100px", 
+                height: "100px", 
+                borderRadius: "50%", 
+                border: "2px solid #E63946",
+                boxShadow: "0 0 20px rgba(230,57,70,0.3)"
               }} 
             />
           </motion.div>
-        </div>
+        )}
+
+        {!isMobile && (
+          <div style={{ 
+            display: "flex", 
+            flexDirection: "column", 
+            alignItems: "center",
+            marginTop: "0",
+            marginBottom: "0"
+          }}>
+            <motion.p
+              initial={{ opacity: 0, letterSpacing: "0.3em" }}
+              animate={{ opacity: 1, letterSpacing: "0.5em" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              style={{
+                color: "#F77F00",
+                fontSize: "0.8rem",
+                fontWeight: 700,
+                letterSpacing: "0.5em",
+                textTransform: "uppercase",
+                marginBottom: "0.75rem",
+              }}
+            >
+              Jaipur's Finest — Since 2018
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              style={{ 
+                marginBottom: "2rem", 
+                width: "100%", 
+                display: "flex", 
+                justifyContent: "center" 
+              }}
+              data-testid="hero-title"
+            >
+              <img 
+                src="/ching_chong_wordmark.png" 
+                alt="CHING CHONG" 
+                style={{ 
+                  width: "min(90vw, 750px)", 
+                  height: "auto", 
+                  display: "block",
+                  opacity: 0.85,
+                  mixBlendMode: "screen",
+                  filter: "brightness(1.05) contrast(1.1) drop-shadow(0 0 20px rgba(0,0,0,0.8))"
+                }} 
+              />
+            </motion.div>
+          </div>
+        )}
 
         {!isMobile && (
           <motion.p
@@ -623,35 +652,99 @@ function HeroSection() {
           </motion.div>
         )}
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          style={{ 
-            marginTop: isMobile ? "0" : "4rem", 
-            position: isMobile ? "absolute" : "relative",
-            bottom: isMobile ? "3rem" : "auto",
-            left: isMobile ? "0" : "auto",
-            right: isMobile ? "0" : "auto",
-            display: "flex", 
-            flexDirection: isMobile ? "column" : "row",
-            gap: isMobile ? "0.6rem" : "2rem", 
-            justifyContent: "center", 
+        {!isMobile && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            style={{ 
+              marginTop: "4rem", 
+              position: "relative",
+              bottom: "auto",
+              left: "auto",
+              right: "auto",
+              display: "flex", 
+              flexDirection: "row",
+              gap: "2rem", 
+              justifyContent: "center", 
+              alignItems: "center",
+              flexWrap: "wrap" 
+            }}
+          >
+            {[
+              { icon: <Star size={16} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
+              { icon: <MapPin size={16} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
+              { icon: <Clock size={16} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#aaa", fontSize: "0.85rem", textAlign: "center" }}>
+                {item.icon}
+                {item.text}
+              </div>
+            ))}
+          </motion.div>
+        )}
+        
+        {isMobile && (
+          <div style={{ 
+            position: "absolute", 
+            bottom: "4vh",
+            width: "100%",
+            left: 0,
+            display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            flexWrap: "wrap" 
-          }}
-        >
-          {[
-            { icon: <Star size={16} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
-            { icon: <MapPin size={16} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
-            { icon: <Clock size={16} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
-          ].map((item, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#aaa", fontSize: isMobile ? "0.8rem" : "0.85rem", textAlign: "center" }}>
-              {item.icon}
-              {item.text}
-            </div>
-          ))}
-        </motion.div>
+            gap: "1.2rem",
+            padding: "0 1rem"
+          }}>
+            {/* The 3 trust lines */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              style={{ 
+                display: "flex", 
+                flexDirection: "column",
+                gap: "0.4rem", 
+                justifyContent: "center", 
+                alignItems: "center"
+              }}
+            >
+              {[
+                { icon: <Star size={14} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
+                { icon: <MapPin size={14} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
+                { icon: <Clock size={14} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#aaa", fontSize: "0.75rem" }}>
+                  {item.icon}
+                  {item.text}
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Branding Group */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+            >
+              <img 
+                src="/ching_chong_wordmark.png" 
+                alt="CHING CHONG" 
+                style={{ width: "min(75vw, 350px)", opacity: 0.9, marginBottom: "0.2rem" }} 
+              />
+              <p style={{ 
+                color: "#F77F00", 
+                fontSize: "0.6rem", 
+                fontWeight: 700, 
+                letterSpacing: "0.3em", 
+                textTransform: "uppercase",
+              }}>
+                Jaipur's Finest — Since 2018
+              </p>
+            </motion.div>
+          </div>
+        )}
       </motion.div>
 
       <motion.div
