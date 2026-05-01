@@ -477,7 +477,7 @@ function HeroSection() {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `url(${isMobile ? '/hero-bg-mobile.png' : '/hero-bg-desktop.png'})`,
+          backgroundImage: `url(${isMobile ? '/hero-bg-mobile.png' : '/hero-bg.png'})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           zIndex: 0,
