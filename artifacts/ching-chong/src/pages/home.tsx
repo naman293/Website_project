@@ -477,9 +477,14 @@ function HeroSection() {
         style={{
           position: "absolute",
           inset: 0,
+          backgroundImage: `url(${isMobile ? '/mobile-hero-bg.png' : '/hero-bg.png'})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          zIndex: 0,
+          scale: 1.1,
+          opacity: isMobile ? 0.6 : 0.7,
           y: bgY,
           filter: "brightness(0.4) contrast(1.1)",
-          opacity: 0.7,
         }}
       />
 
@@ -511,20 +516,23 @@ function HeroSection() {
       >
         {isMobile && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            style={{ marginTop: "2vh" }}
+            style={{ 
+              marginTop: "0",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center"
+            }}
           >
             <img 
-              src="/mascot.jpg" 
+              src="/chef_mascot_transparent.png" 
               alt="Mascot" 
               style={{ 
-                width: "100px", 
-                height: "100px", 
-                borderRadius: "50%", 
-                border: "2px solid #E63946",
-                boxShadow: "0 0 20px rgba(230,57,70,0.3)"
+                width: "min(80vw, 280px)", 
+                height: "auto",
+                filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.5))"
               }} 
             />
           </motion.div>
@@ -687,41 +695,16 @@ function HeroSection() {
         {isMobile && (
           <div style={{ 
             position: "absolute", 
-            bottom: "4vh",
+            bottom: "5vh",
             width: "100%",
             left: 0,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "1.2rem",
+            gap: "1.5rem",
             padding: "0 1rem"
           }}>
-            {/* The 3 trust lines */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              style={{ 
-                display: "flex", 
-                flexDirection: "column",
-                gap: "0.4rem", 
-                justifyContent: "center", 
-                alignItems: "center"
-              }}
-            >
-              {[
-                { icon: <Star size={14} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
-                { icon: <MapPin size={14} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
-                { icon: <Clock size={14} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
-              ].map((item, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#aaa", fontSize: "0.75rem" }}>
-                  {item.icon}
-                  {item.text}
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Branding Group */}
+            {/* Branding Group (Main Heading) */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -731,17 +714,42 @@ function HeroSection() {
               <img 
                 src="/ching_chong_wordmark.png" 
                 alt="CHING CHONG" 
-                style={{ width: "min(75vw, 350px)", opacity: 0.9, marginBottom: "0.2rem" }} 
+                style={{ width: "min(80vw, 400px)", opacity: 1, marginBottom: "0.2rem" }} 
               />
               <p style={{ 
                 color: "#F77F00", 
-                fontSize: "0.6rem", 
+                fontSize: "0.65rem", 
                 fontWeight: 700, 
-                letterSpacing: "0.3em", 
+                letterSpacing: "0.4em", 
                 textTransform: "uppercase",
               }}>
                 Jaipur's Finest — Since 2018
               </p>
+            </motion.div>
+
+            {/* The 3 trust lines */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              style={{ 
+                display: "flex", 
+                flexDirection: "column",
+                gap: "0.5rem", 
+                justifyContent: "center", 
+                alignItems: "center"
+              }}
+            >
+              {[
+                { icon: <Star size={14} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
+                { icon: <MapPin size={14} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
+                { icon: <Clock size={14} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#ccc", fontSize: "0.75rem", fontWeight: 400 }}>
+                  {item.icon}
+                  {item.text}
+                </div>
+              ))}
             </motion.div>
           </div>
         )}
