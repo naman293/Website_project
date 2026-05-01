@@ -496,12 +496,12 @@ function HeroSection() {
           position: "relative", 
           zIndex: 2, 
           textAlign: "center", 
-          padding: isMobile ? "8vh 1.5rem 4vh" : "2rem 1.5rem", 
+          padding: isMobile ? "0 1.5rem" : "2rem 1.5rem", 
           maxWidth: "900px", 
-          height: isMobile ? "80vh" : "auto",
+          height: isMobile ? "100vh" : "auto",
           display: isMobile ? "flex" : "block",
           flexDirection: "column",
-          justifyContent: isMobile ? "space-between" : "center"
+          justifyContent: isMobile ? "center" : "center"
         }}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -626,7 +626,11 @@ function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
           style={{ 
-            marginTop: isMobile ? "1rem" : "4rem", 
+            marginTop: isMobile ? "0" : "4rem", 
+            position: isMobile ? "absolute" : "relative",
+            bottom: isMobile ? "3rem" : "auto",
+            left: isMobile ? "0" : "auto",
+            right: isMobile ? "0" : "auto",
             display: "flex", 
             flexDirection: isMobile ? "column" : "row",
             gap: isMobile ? "0.6rem" : "2rem", 
