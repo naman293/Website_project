@@ -355,20 +355,15 @@
 }
 
 .hero-responsive-bg {
-  background-image: url(/hero_static_bg.png);
+  background-image: url(/hero-bg.png);
   background-size: cover;
-  background-position: center;
+  background-position: center top;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .hero-responsive-bg {
-    background-image: url(/hero_mobile.png) !important;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .hero-responsive-bg {
-    background-image: url(/hero_tablet.png) !important;
+    background-image: url(/mobile-hero-bg.png) !important;
+    background-position: center center;
   }
 }
 

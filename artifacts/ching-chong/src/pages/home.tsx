@@ -477,12 +477,12 @@ function HeroSection() {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `url(${isMobile ? '/hero-bg-mobile.png' : '/hero-bg.png'})`,
+          backgroundImage: `url(/hero-bg.png)`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "center top",
           zIndex: 0,
           scale: 1.1,
-          opacity: isMobile ? 0.6 : 0.7,
+          opacity: isMobile ? 0.55 : 0.7,
           y: bgY,
           filter: "brightness(0.4) contrast(1.1)",
         }}
@@ -1531,16 +1531,15 @@ function DirectionsSection() {
                   data-testid="map-embed"
                 />
               </div>
-              {/* Custom "Open in Maps" overlay — replaces auto-generated iframe button */}
+              {/* "Open in Maps" button — positioned bottom-right of the iframe */}
               <a
                 href="https://www.google.com/maps/dir/?api=1&destination=26.8927142%2C75.8278899&travelmode=driving"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
                   position: "absolute",
-                  top: "12px",
+                  bottom: "12px",
                   right: "12px",
-                  transform: "none",
                   width: "max-content",
                   background: "rgba(10,10,10,0.95)",
                   border: "2px solid #E63946",
