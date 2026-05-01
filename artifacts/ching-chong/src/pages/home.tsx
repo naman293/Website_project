@@ -501,14 +501,14 @@ function HeroSection() {
           position: "relative", 
           zIndex: 2, 
           textAlign: "center", 
-          padding: isMobile ? "2vh 1.5rem" : "2rem 1.5rem", 
-          maxWidth: "900px", 
+          padding: isMobile ? "0" : "2rem 1.5rem", 
+          maxWidth: isMobile ? "100%" : "900px",
           width: "100%",
           height: isMobile ? "100vh" : "auto",
-          display: isMobile ? "flex" : "block",
+          display: "flex",
           flexDirection: "column",
-          justifyContent: isMobile ? "space-between" : "center",
-          alignItems: isMobile ? "center" : "unset"
+          justifyContent: "center",
+          alignItems: "center"
         }}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -584,33 +584,36 @@ function HeroSection() {
         {/* ========== MOBILE ONLY LAYOUT ========== */}
         {isMobile && (
           <>
-            {/* CENTER BLOCK — Mascot + Branding grouped and vertically centered */}
+            {/* CENTER BLOCK — Mascot + Branding, true vertical+horizontal center */}
             <div style={{
               position: "absolute",
               top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
+              left: "0",
+              right: "0",
+              transform: "translateY(-50%)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "1.8rem",
-              width: "100%",
+              justifyContent: "center",
+              gap: "1.6rem",
               padding: "0 1.5rem",
             }}>
-              {/* Mascot */}
+              {/* Mascot — bigger */}
               <motion.div
                 initial={{ opacity: 0, y: -15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.2 }}
-                style={{ display: "flex", justifyContent: "center" }}
+                style={{ display: "flex", justifyContent: "center", width: "100%" }}
               >
                 <img
                   src="/chef_mascot_transparent.png"
                   alt="Chef Nepal Mascot"
                   style={{
-                    width: "min(55vw, 220px)",
+                    width: "min(65vw, 260px)",
                     height: "auto",
-                    filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.6))"
+                    display: "block",
+                    margin: "0 auto",
+                    filter: "drop-shadow(0 12px 36px rgba(0,0,0,0.65))"
                   }}
                 />
               </motion.div>
@@ -620,15 +623,25 @@ function HeroSection() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.9 }}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.3rem" }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.3rem",
+                  width: "100%",
+                  textAlign: "center"
+                }}
               >
                 <p style={{
                   color: "#F77F00",
-                  fontSize: "0.6rem",
+                  fontSize: "0.62rem",
                   fontWeight: 700,
-                  letterSpacing: "0.45em",
+                  letterSpacing: "0.4em",
                   textTransform: "uppercase",
                   margin: 0,
+                  textAlign: "center",
+                  width: "100%",
                 }}>
                   Jaipur's Finest — Since 2018
                 </p>
@@ -636,8 +649,10 @@ function HeroSection() {
                   src="/ching_chong_wordmark.png"
                   alt="CHING CHONG"
                   style={{
-                    width: "min(82vw, 380px)",
+                    width: "min(85vw, 380px)",
                     height: "auto",
+                    display: "block",
+                    margin: "0 auto",
                     opacity: 1,
                     filter: "brightness(1.1) drop-shadow(0 0 18px rgba(0,0,0,0.9))"
                   }}
@@ -645,30 +660,32 @@ function HeroSection() {
               </motion.div>
             </div>
 
-            {/* BOTTOM BLOCK — Trust badges */}
+            {/* BOTTOM BLOCK — Trust badges, properly centered */}
             <div style={{
               position: "absolute",
               bottom: "5vh",
               left: 0,
-              width: "100%",
+              right: 0,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent: "center",
               gap: "0.45rem",
               padding: "0 1rem",
+              textAlign: "center",
             }}>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.0, duration: 0.8 }}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.45rem" }}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.45rem", width: "100%" }}
               >
                 {[
                   { icon: <Star size={13} style={{ color: "#FCCA46" }} />, text: "Rated Jaipur's Best Chinese" },
                   { icon: <MapPin size={13} style={{ color: "#E63946" }} />, text: "Near Rajapark Main Circle" },
                   { icon: <Clock size={13} style={{ color: "#F77F00" }} />, text: "Open 7 Days a Week" },
                 ].map((item, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "#ddd", fontSize: "0.72rem", fontWeight: 400 }}>
+                  <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", color: "#ddd", fontSize: "0.72rem", fontWeight: 400, width: "100%" }}>
                     {item.icon}
                     {item.text}
                   </div>
@@ -684,11 +701,14 @@ function HeroSection() {
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
-          bottom: isMobile ? "18vh" : "2rem",
+          bottom: isMobile ? "16vh" : "2rem",
           left: "50%",
           transform: "translateX(-50%)",
           color: "rgba(255,255,255,0.35)",
-          zIndex: 2,
+          zIndex: 3,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <ChevronDown size={isMobile ? 22 : 28} />

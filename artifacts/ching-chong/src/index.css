@@ -367,6 +367,32 @@
   }
 }
 
+/* ======= MOBILE / PHONE ALIGNMENT FIXES ======= */
+@media (max-width: 768px) {
+  /* All section headings, labels and dividers centered */
+  section h2,
+  section h3,
+  section p,
+  section .section-divider {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Cards in all sections fill width and center their content */
+  section [style*="display: flex"] {
+    justify-content: center;
+  }
+
+  /* Ensure images inside sections are horizontally centered */
+  section img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* ============================================== */
+
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 15px rgba(230, 57, 70, 0.5), 0 0 30px rgba(230, 57, 70, 0.2); }
   50% { box-shadow: 0 0 25px rgba(230, 57, 70, 0.8), 0 0 50px rgba(230, 57, 70, 0.4); }
