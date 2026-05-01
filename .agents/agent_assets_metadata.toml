@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "HmW1FIoFDK68sAP_Iw06U"
+uri = "file://artifacts/ching-chong/public/hero-bg.png"
+type = "image"
+title = "Hero dark neon street food"
+
+[[generated]]
+id = "wrTKByMXpl_OpeZu5pnxG"
+uri = "file://artifacts/ching-chong/public/about-food.png"
+type = "image"
+title = "Cinematic fiery wok tossed food"
