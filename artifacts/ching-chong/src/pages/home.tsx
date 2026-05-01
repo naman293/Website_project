@@ -59,14 +59,30 @@ function TypeBadge({ type }: { type: string }) {
   );
 }
 
-function Navbar({ mobileMenuOpen, setMobileMenuOpen }: { mobileMenuOpen: boolean; setMobileMenuOpen: (v: boolean) => void }) {
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isMobile;
+}
+
+function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  useEffect(() => {
+    if (!isMobile) setOpen(false);
+  }, [isMobile]);
 
   const navLinks = [
     { label: "Home", href: "#home" },
@@ -85,143 +101,146 @@ function Navbar({ mobileMenuOpen, setMobileMenuOpen }: { mobileMenuOpen: boolean
         left: 0,
         right: 0,
         zIndex: 100,
-        background: scrolled ? "rgba(10,10,10,0.96)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(230,57,70,0.15)" : "none",
-        transition: "all 0.3s ease",
-        padding: "0 1.5rem",
+        background: scrolled || open ? "rgba(10,10,10,0.97)" : "transparent",
+        backdropFilter: scrolled || open ? "blur(12px)" : "none",
+        borderBottom: scrolled || open ? "1px solid rgba(230,57,70,0.15)" : "none",
+        transition: "background 0.3s ease, border-color 0.3s ease",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px", padding: "0 1.5rem" }}>
         <a href="#home" style={{ textDecoration: "none" }} data-testid="nav-logo">
-          <span
-            className="font-display neon-red"
-            style={{ fontSize: "2rem", letterSpacing: "0.05em" }}
-          >
+          <span className="font-display neon-red" style={{ fontSize: "2rem", letterSpacing: "0.05em" }}>
             CHING CHONG
           </span>
         </a>
 
-        <nav style={{ display: "none", gap: "2rem" }} className="md-nav" data-testid="nav-desktop">
-          <style>{`@media (min-width: 768px) { .md-nav { display: flex !important; } .mobile-menu-btn { display: none !important; } }`}</style>
-          {navLinks.map((link) => (
+        {!isMobile && (
+          <nav style={{ display: "flex", alignItems: "center", gap: "2rem" }} data-testid="nav-desktop">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                data-testid={`nav-link-${link.label.toLowerCase()}`}
+                style={{
+                  color: "#ccc",
+                  textDecoration: "none",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                  transition: "color 0.2s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#E63946")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#ccc")}
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              key={link.href}
-              href={link.href}
-              data-testid={`nav-link-${link.label.toLowerCase()}`}
+              href={PHONE_HREF}
+              data-testid="nav-call-btn"
+              className="btn-neon-red"
               style={{
-                color: "#ccc",
+                color: "#fff",
                 textDecoration: "none",
+                padding: "8px 20px",
+                borderRadius: "6px",
                 fontSize: "0.875rem",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "0.05em",
-                textTransform: "uppercase",
-                transition: "color 0.2s ease",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#E63946")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#ccc")}
             >
-              {link.label}
+              <Phone size={14} />
+              CALL NOW
             </a>
-          ))}
-          <a
-            href={PHONE_HREF}
-            data-testid="nav-call-btn"
-            className="btn-neon-red"
+          </nav>
+        )}
+
+        {isMobile && (
+          <button
+            data-testid="nav-mobile-menu-btn"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
             style={{
+              background: "none",
+              border: "none",
               color: "#fff",
-              textDecoration: "none",
-              padding: "8px 20px",
-              borderRadius: "6px",
-              fontSize: "0.875rem",
-              fontWeight: 700,
-              letterSpacing: "0.05em",
+              cursor: "pointer",
+              padding: "8px",
               display: "flex",
               alignItems: "center",
-              gap: "6px",
+              justifyContent: "center",
             }}
           >
-            <Phone size={14} />
-            CALL NOW
-          </a>
-        </nav>
-
-        <button
-          className="mobile-menu-btn"
-          data-testid="nav-mobile-menu-btn"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          style={{
-            background: "none",
-            border: "none",
-            color: "#fff",
-            cursor: "pointer",
-            padding: "8px",
-          }}
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+            {open ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        )}
       </div>
 
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            style={{
-              background: "rgba(10,10,10,0.98)",
-              borderTop: "1px solid rgba(230,57,70,0.2)",
-              overflow: "hidden",
-            }}
-            data-testid="nav-mobile-menu"
-          >
-            <div style={{ padding: "1rem 1.5rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  data-testid={`mobile-nav-link-${link.label.toLowerCase()}`}
-                  style={{
-                    color: "#ccc",
-                    textDecoration: "none",
-                    fontSize: "1rem",
-                    fontWeight: 500,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    padding: "0.5rem 0",
-                    borderBottom: "1px solid rgba(255,255,255,0.05)",
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
+      {isMobile && (
+        <div
+          data-testid="nav-mobile-menu"
+          style={{
+            overflow: "hidden",
+            maxHeight: open ? "500px" : "0px",
+            transition: "max-height 0.35s ease",
+            background: "rgba(10,10,10,0.98)",
+            borderTop: open ? "1px solid rgba(230,57,70,0.2)" : "none",
+          }}
+        >
+          <div style={{ padding: "1rem 1.5rem", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            {navLinks.map((link) => (
               <a
-                href={PHONE_HREF}
-                className="btn-neon-red"
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                data-testid={`mobile-nav-link-${link.label.toLowerCase()}`}
                 style={{
-                  color: "#fff",
+                  color: "#ccc",
                   textDecoration: "none",
-                  padding: "12px 20px",
-                  borderRadius: "6px",
                   fontSize: "1rem",
-                  fontWeight: 700,
+                  fontWeight: 500,
                   letterSpacing: "0.08em",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "8px",
-                  marginTop: "0.5rem",
+                  textTransform: "uppercase",
+                  padding: "0.75rem 0",
+                  borderBottom: "1px solid rgba(255,255,255,0.05)",
+                  display: "block",
                 }}
-                data-testid="mobile-nav-call-btn"
               >
-                <Phone size={16} />
-                CALL NOW — {PHONE_NUMBER}
+                {link.label}
               </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+            <a
+              href={PHONE_HREF}
+              className="btn-neon-red"
+              style={{
+                color: "#fff",
+                textDecoration: "none",
+                padding: "14px 20px",
+                borderRadius: "6px",
+                fontSize: "1rem",
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                marginTop: "0.75rem",
+                marginBottom: "0.5rem",
+              }}
+              data-testid="mobile-nav-call-btn"
+              onClick={() => setOpen(false)}
+            >
+              <Phone size={16} />
+              CALL NOW — {PHONE_NUMBER}
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
@@ -1009,6 +1028,8 @@ function Footer() {
 }
 
 function StickyCallBar() {
+  const isMobile = useIsMobile();
+  if (!isMobile) return null;
   return (
     <div
       data-testid="sticky-call-bar"
@@ -1023,9 +1044,7 @@ function StickyCallBar() {
         borderTop: "1px solid rgba(230,57,70,0.3)",
         backdropFilter: "blur(12px)",
       }}
-      className="md-hidden"
     >
-      <style>{`@media (min-width: 768px) { .md-hidden { display: none !important; } }`}</style>
       <a
         href={PHONE_HREF}
         className="btn-neon-red pulse-glow"
@@ -1053,12 +1072,9 @@ function StickyCallBar() {
 }
 
 export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   return (
-    <div style={{ background: "#0a0a0a", minHeight: "100vh", paddingBottom: "70px" }}>
-      <style>{`@media (min-width: 768px) { .mobile-pb { padding-bottom: 0 !important; } }`}</style>
-      <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
+    <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+      <Navbar />
       <main>
         <HeroSection />
         <AboutSection />
