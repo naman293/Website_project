@@ -684,14 +684,14 @@ function HeroSection() {
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
-          bottom: "2rem",
+          bottom: isMobile ? "18vh" : "2rem",
           left: "50%",
           transform: "translateX(-50%)",
-          color: "rgba(255,255,255,0.4)",
+          color: "rgba(255,255,255,0.35)",
           zIndex: 2,
         }}
       >
-        <ChevronDown size={28} />
+        <ChevronDown size={isMobile ? 22 : 28} />
       </motion.div>
     </section>
   );
